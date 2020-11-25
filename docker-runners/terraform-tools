@@ -1,0 +1,8 @@
+docker run --detach --rm -t \
+  --user $(id -u):$(id -g) \
+  -v /tmp:/tmp \
+  -v $(pwd):$(pwd) \
+  -w $(pwd) \
+  --name $1 \
+  terraform-tools:0.13.4 /bin/sh > /dev/null
+

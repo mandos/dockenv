@@ -1,0 +1,14 @@
+docker run --detach --rm -it \
+  --user $(id -u):$(id -g) \
+  -v /tmp:/tmp \
+  -v $(pwd):$(pwd) \
+  -w $(pwd) \
+  --env GOCACHE=/var/tmp \
+  --env GOPATH=$(pwd)/.golang \
+  --env PATH=$(pwd)/.golang/bin:/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+  --name $1 \
+  golang:1.15 /bin/sh > /dev/null
+
+docker exec $CONTAINER sh -c "go get golang.org/x/tools/gopls"
+docker exec $CONTAINER sh -c "go get github.com/canthefason/go-watcher"
+docker exec $CONTAINER sh -c "go install github.com/canthefason/go-watcher/cmd/watcher"

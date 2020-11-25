@@ -1,0 +1,5 @@
+use_dockenv() {
+  export DOCKENV_ROOT=$PWD
+  dockenv-start
+  PATH_add "${DOCKENV_ROOT}/.dockenv/bin"
+}

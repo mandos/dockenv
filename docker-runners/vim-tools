@@ -1,0 +1,9 @@
+docker run --detach --rm -it \
+  --user $(id -u):$(id -g) \
+  -v /tmp:/tmp \
+  -v $(pwd):$(pwd) \
+  -w $(pwd) \
+  -v /usr/local/share/nvim:/usr/local/share/nvim:ro \
+  -v $HOME/.local/share/nvim:$HOME/.local/share/nvim:ro \
+  --name $1 \
+  vim-tools /bin/sh > /dev/null

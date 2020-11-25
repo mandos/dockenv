@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# set -x
+
+[ "${DOCKENV_ROOT}" == "" ] && echo "Error: Missing DOCKENV_ROOT environment variable" && exit 1
+
+COMMAND=$1
+YAML_PATH=$(yq r $DOCKENV_ROOT/.dockenv.yaml --printMode p "*.cmd(.==${COMMAND})")
+DOCKER_RUNNER=${YAML_PATH%%.*}
+CONTAINER="$(basename $DOCKENV_ROOT)-${DOCKER_RUNNER}"
+
+if [ -z $(docker ps -q --filter "name=${CONTAINER}") ]; then
+  [ -f $HOME/.dockenv/$DOCKER_RUNNER ] && source $HOME/.dockenv/$DOCKER_RUNNER $CONTAINER && echo $CONTAINER && exit 0
+  [ -f $XDG_CONFIG_HOME/dockenv/$DOCKER_RUNNER ] && source $XDG_CONFIG_HOME/dockenv/$DOCKER_RUNNER $CONTAINER && echo $CONTAINER && exit 0
+  echo "Error: No docker runner file ${DOCKER_RUNNER} in paths: ${HOME}/.dockenv; ${XDG_CONFIG_HOME}/dockenv"
+  exit 1
+fi
+
+echo $CONTAINER
