@@ -78,5 +78,5 @@ Tested manually on:
 
 ## Licence
 
-This project is licensed under terms of **MIT** licence.
+This project is licensed under terms of [**MIT** licence](https://github.com/mandos/dockenv/blob/main/LICENSE).
 
