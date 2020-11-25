@@ -1,0 +1,7 @@
+vim-tools:
+  cmd:
+  - vint
+  - vim-language-server
+terraform-tools:
+  cmd:
+  - terraform
