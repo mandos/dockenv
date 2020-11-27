@@ -9,6 +9,7 @@ rm -rf "${DOCKENV_ROOT}/.dockenv"
 
 for DOCKER_RUNNER in $(yq r $CONFIG -pp "*"); do
   CONTAINER="$(basename $DOCKENV_ROOT)-${DOCKER_RUNNER}"
+  echo "Checking if container ${CONTAINER} is running..."
   if [ ! -z $(docker ps -q --filter "name=${CONTAINER}") ]; then
     echo "Stopping container ${CONTAINER}..."
     docker stop $CONTAINER

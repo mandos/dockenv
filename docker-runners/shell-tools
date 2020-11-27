@@ -1,0 +1,7 @@
+docker run --detach --rm -it \
+  --user $(id -u):$(id -g) \
+  -v /tmp:/tmp \
+  -v $(pwd):$(pwd) \
+  -w $(pwd) \
+  --name $1 \
+  shell-tools /bin/sh > /dev/null

@@ -10,7 +10,7 @@ rm -rf $BIN && mkdir -p $BIN
 test -f  || (echo "Error: Missing configuration file .dockenv.yaml" && exit 1)
 
 for CMD in $(yq r $CONFIG "*.cmd[*]"); do
-  echo "Creating shims for $CMD"
+  echo "Creating shim for $CMD"
   ln -s "${DOCKENV_PATH}/dockenv-cmd" "${BIN}/${CMD}"
 done
 

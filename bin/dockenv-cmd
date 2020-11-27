@@ -9,7 +9,7 @@ CONTAINER=$(source dockenv-container $COMMAND )
 [ "$?" -eq 0 ] || (echo "Error: Cannot run command in container" && exit 1)
 
 if [ -z $(docker ps -q --filter "name=${CONTAINER}") ]; then
-  source $HOME/.dockenv/$IMAGE $CONTAINER
+  $HOME/.dockenv/$IMAGE $CONTAINER
 fi
 
 docker exec -i $CONTAINER $COMMAND "$@"
